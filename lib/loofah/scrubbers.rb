@@ -233,6 +233,28 @@ module Loofah
       end
     end
 
+    #
+    #  === scrub!(:target_blank)
+    #
+    #  +:target_blank+ adds target="_blank" and rel="noopener noreferrer" attribute to all links
+    #
+    #     link_farmers_markup = "ohai! <a href='http://www.myswarmysite.com/'>I like your blog post</a>"
+    #     Loofah.fragment(link_farmers_markup).scrub!(:target_blank)
+    #     => "ohai! <a href='http://www.myswarmysite.com/' target="_blank" rel="noopener noreferrer">I like your blog post</a>"
+    #
+    class TargetBlank < Scrubber
+      def initialize
+        @direction = :top_down
+      end
+
+      def scrub(node)
+        return CONTINUE unless (node.type == Nokogiri::XML::Node::ELEMENT_NODE) && (node.name == "a")
+        append_attribute(node, "target", "_blank")
+        append_attribute(node, "rel", "noopener noreferrer")
+        return STOP
+      end
+    end
+
     # This class probably isn't useful publicly, but is used for #to_text's current implemention
     class NewlineBlockElements < Scrubber # :nodoc:
       def initialize
@@ -284,6 +306,7 @@ module Loofah
       :strip => Strip,
       :nofollow => NoFollow,
       :noopener => NoOpener,
+      :target_blank => TargetBlank,
       :newline_block_elements => NewlineBlockElements,
       :unprintable => Unprintable,
     }
