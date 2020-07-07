@@ -98,6 +98,16 @@ module Loofah
       node.set_attribute(attribute, updated_value.join(" "))
     end
 
+    #
+    # If the attribute is not set, add it
+    # If the attribute is set, add the value to existing values list
+    #
+    def add_list_attribute(node, attribute, value)
+      current_values = node.get_attribute(attribute).split(" ") || []
+      updated_values = current_values.push(value).uniq
+      node.set_attribute(attribute, updated_values.join(" "))
+    end
+
     private
 
     def html5lib_sanitize(node)

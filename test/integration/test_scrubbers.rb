@@ -21,12 +21,12 @@ class IntegrationTestScrubbers < Loofah::TestCase
   NOOPENER_WITH_REL_FRAGMENT = '<a href="http://www.example.com/" rel="nofollow">Click here</a>'
   NOOPENER_WITH_REL_RESULT = '<a href="http://www.example.com/" rel="nofollow noopener">Click here</a>'
 
-  TARGET_BLANK_FRAGMENTS = '<a href="http://www.example.com/">Click here</a>'
+  TARGET_BLANK_FRAGMENT = '<a href="http://www.example.com/">Click here</a>'
   TARGET_BLANK_WITH_NOFOLLOW_REL_FRAGMENT = '<a href="http://www.example.com/" rel="nofollow">Click here</a>'
   TARGET_BLANK_WITH_NOOPENER_REL_FRAGMENT = '<a href="http://www.example.com/" rel="noopener">Click here</a>'
   TARGET_BLANK_WITH_NOREFERRER_REL_FRAGMENT = '<a href="http://www.example.com/" rel="noreferrer">Click here</a>'
-  TARGET_BLANK_RESULT = '<a href="http://www.example.com/" target="_blank" rel="noopener noreferrer">Click here</a>'
-  TARGET_BLANK_NOFOLLOW_RESULT = '<a href="http://www.example.com/" target="_blank" rel="nofollow noopener noreferrer">Click here</a>'
+  TARGET_BLANK_RESULT = '<a href="http://www.example.com/" rel="noopener noreferrer" target="_blank">Click here</a>'
+  TARGET_BLANK_NOFOLLOW_RESULT = '<a href="http://www.example.com/" rel="nofollow noopener noreferrer" target="_blank">Click here</a>'
 
   UNPRINTABLE_FRAGMENT = "<b>Lo\u2029ofah ro\u2028cks!</b><script>x\u2028y</script>"
   UNPRINTABLE_RESULT = "<b>Loofah rocks!</b><script>xy</script>"

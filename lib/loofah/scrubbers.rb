@@ -249,8 +249,9 @@ module Loofah
 
       def scrub(node)
         return CONTINUE unless (node.type == Nokogiri::XML::Node::ELEMENT_NODE) && (node.name == "a")
-        append_attribute(node, "target", "_blank")
-        append_attribute(node, "rel", "noopener noreferrer")
+        node.set_attribute("target", "_blank")
+        add_list_attribute(node, "rel", "noopener")
+        add_list_attribute(node, "rel", "noreferrer")
         return STOP
       end
     end
